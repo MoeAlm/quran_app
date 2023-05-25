@@ -19,7 +19,7 @@ class AyahScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new_outlined,
             color: Colors.white,
           ),
@@ -31,85 +31,62 @@ class AyahScreen extends StatelessWidget {
           if (snapshot.hasData) {
             List<SurahModel> surahList = snapshot.data as List<SurahModel>;
             return ListView.builder(
-                itemCount: surahList[surahNumber].number,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  SurahModel surah = surahList[index];
-                  return surah.number == surahNumber
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              width: w,
-                              height: h * 0.15,
-                              decoration: BoxDecoration(
-                                  color: kPrimaryColor.withOpacity(0.7),
-                                  borderRadius: const BorderRadius.vertical(
-                                      bottom: Radius.circular(60))),
-                              child: Text(
-                                '${surah.name}',
-                                style: TextStyle(
-                                    fontSize: w * 0.15, color: kTextColor),
+              itemCount: surahList[surahNumber].number,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                SurahModel surah = surahList[index];
+                return surah.number == surahNumber
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: w,
+                            height: h * 0.15,
+                            decoration: BoxDecoration(
+                              color: kPrimaryColor.withOpacity(0.7),
+                              borderRadius: const BorderRadius.vertical(
+                                bottom: Radius.circular(60),
                               ),
                             ),
-                            SizedBox(
-                              height: h * 0.6,
-                              child: ListView.builder(
-                                  itemCount: surah.ayahs.length,
-                                  itemBuilder: (context, ayahIndex) {
-                                    AyahModel ayah = surah.ayahs[ayahIndex];
-                                    return Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          ayah.text,
-                                          style: TextStyle(fontSize: w * 0.07),
-                                          textWidthBasis:
-                                              TextWidthBasis.longestLine,
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                            )
-                          ],
-                        )
-                      : null;
-                });
-            // return ListView.builder(
-            //   itemCount: surahList.length,
-            //   itemBuilder: (context, index) {
-            //     SurahModel surah = surahList[index];
-            //     return Column(
-            //       children: [
-            //         Text(
-            //           surah.name,
-            //           style: const TextStyle(
-            //             fontWeight: FontWeight.bold,
-            //             fontSize: 16,
-            //           ),
-            //         ),
-            //         ListView.builder(
-            //           itemCount: surah.ayahs.length,
-            //           shrinkWrap: true,
-            //           physics: const NeverScrollableScrollPhysics(),
-            //           itemBuilder: (context, ayahIndex) {
-            //             AyahModel ayah = surah.ayahs[ayahIndex];
-            //             return Text(
-            //                     ayah.text,
-            //                     textAlign: TextAlign.center,
-            //                   );
-            //           },
-            //         ),
-            //         const Divider(),
-            //       ],
-            //     );
-            //   },
-            // );
+                            child: Text(
+                              '${surah.name}',
+                              style: TextStyle(
+                                fontSize: w * 0.15,
+                                color: kTextColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: h * 0.6,
+                            child: ListView.builder(
+                              itemCount: surah.ayahs.length,
+                              itemBuilder: (context, ayahIndex) {
+                                AyahModel ayah = surah.ayahs[ayahIndex];
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0,
+                                    horizontal: 16.0,
+                                  ),
+                                  child: Text(
+                                    ayah.text,
+                                    style: TextStyle(
+                                      fontSize: w * 0.07,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox.shrink();
+              },
+            );
           } else if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else {
