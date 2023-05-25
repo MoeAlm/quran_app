@@ -60,7 +60,7 @@ class AyahScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: h * 0.6,
+                            height: h * 0.8,
                             child: ListView.builder(
                               itemCount: surah.ayahs.length,
                               itemBuilder: (context, ayahIndex) {
