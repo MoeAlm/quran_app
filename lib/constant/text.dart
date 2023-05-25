@@ -1,0 +1,2 @@
+
+const kAppBarTitle = 'Mubeen';
