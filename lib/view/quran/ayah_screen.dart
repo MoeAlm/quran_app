@@ -45,16 +45,20 @@ class AyahScreen extends StatelessWidget {
                             width: w,
                             height: h * 0.15,
                             decoration: BoxDecoration(
-                              color: kPrimaryColor.withOpacity(0.7),
+                              //color: kPrimaryColor.withOpacity(0.7),
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage('assets/images/banner.png')),
                               borderRadius: const BorderRadius.vertical(
                                 bottom: Radius.circular(60),
                               ),
                             ),
                             child: Text(
                               '${surah.name}',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: w * 0.15,
-                                color: kTextColor,
+                                fontSize: w * 0.1,
+                                color: kPrimaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
